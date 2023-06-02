@@ -23,24 +23,29 @@ const typeDefs = gql`
     user: User
   }
 
+  input InputBook {
+    bookId: String
+    authors: [String]
+    title: String
+    description: String
+    image: String
+    link: String
+  }
+
   type Query {
     me: User
     book: [Book]
     user: [User]
   }
 
-  input BookInput {
-    bookId: String!
-    authors: [String]
-    description: String
-    title: String!
-    image: String
-    link: String
+  type Mutation {
+    login(username: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(newBook: InputBook!): User
+    removeBook(bookId: ID!): User
   }
-
-  # type Mutation {
-
-  # }
 `;
+//inputBook came from the module lessons, we didn't directly cover this.
+//I suppose I could've put in each of those keys and values in manually into savebook.
 
 module.exports = typeDefs;
